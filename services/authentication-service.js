@@ -8,7 +8,7 @@ router.get('/log',function(req,res){
 }); 
 
 // add a new ninja to the db
-router.post('/log',function(req ,res){
+router.post('/reg',function(req ,res){
     User.create(req.body,function(err){
         if(err){
             res.status(400).send(err);
@@ -18,12 +18,59 @@ router.post('/log',function(req ,res){
         }
         
     });
-});
-router.put('/log/:id',function(req,res){
-    res.send({type:'PUT'});
+
+    // const  user = new authentication-service({
+    //     firstName:req.body.userName,
+    //     lastName:req.body.userName,
+    //     email:req.body.email,
+    //     password:req.body.password
+    // });
+
+    // let promise =user.save();
+
+    // promise.then(
+    //     function (doc) {
+    //         return res.status(201).json(doc);
+    //     })
+
+    // promise.catch(
+    //     function(err){
+    //         return res.status(501).json({message:'Error registering user'})
+    //     })
+
 });
 
-router.delete('/log/:id',function(req,res){
+
+
+// router.post('/login',function(req,res,next){
+//    let promise = User.findOne({email:req.body.email}).exec();
+
+//    promise.then(function(doc){
+//     if(doc) {
+//         if(doc.isValid(req.body.password)){
+
+//         }
+//         else {
+//             return res.status(501).json({message:'Invalid Credentials'});
+//         }
+//     }
+//     else {
+//         return res.status(501).json({message:'User email is not registered.'})
+//     }
+//    });
+
+//    promise.catch(function(err){
+//        return res.status(501).json({message:'some internal error'});
+//    })
+// }); 
+
+
+
+// router.put('/put/:id',function(req,res){
+//     res.send({type:'PUT'});
+// });
+
+router.delete('/del/:id',function(req,res){
     res.send({type:'DELETE'});
 });
 

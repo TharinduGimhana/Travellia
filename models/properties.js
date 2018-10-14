@@ -14,6 +14,14 @@ const PropertySchema = new Schema({
         type:String,
     },
 
+    contactno:{
+        type:String,
+    },
+
+    contactname:{
+        type:String,
+    },
+
     description:{
         type:String,
     },
@@ -47,6 +55,9 @@ const PropertySchema = new Schema({
 
     location:{
         address:{
+            type:String,
+        },
+        postalcode:{
             type:String,
         },
         cordinates:[{lat:Number, lng:Number}],
