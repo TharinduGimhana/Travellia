@@ -1,74 +1,108 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 
 //get a list of ninjas from the db
-router.get('/log',function(req,res){
-    res.send({type:'GET'});
-}); 
+// router.get('/log',function(req,res){
+//     res.send({type:'GET'});
+// }); 
 
 // add a new ninja to the db
 router.post('/reg',function(req ,res){
-    User.create(req.body,function(err){
-        if(err){
-            res.status(400).send(err);
-        }
-        else{
-            res.status(200).send({success:"user created"});
-        }
+    // User.create(req.body,function(err){
+    //     if(err){
+    //         res.status(400).send(err);
+    //     }
+    //     else{
+    //         res.status(200).send({success:"user created"});
+    //     }
         
-    });
-
-    // const  user = new authentication-service({
-    //     firstName:req.body.userName,
-    //     lastName:req.body.userName,
-    //     email:req.body.email,
-    //     password:req.body.password
     // });
 
-    // let promise =user.save();
 
-    // promise.then(
-    //     function (doc) {
-    //         return res.status(201).json(doc);
-    //     })
 
-    // promise.catch(
-    //     function(err){
-    //         return res.status(501).json({message:'Error registering user'})
-    //     })
+    bcrypt.hash(req.body.password, 10, function(err, hash){
+        if(err) {
+           return res.status(500).json({
+              error: err
+           });
+        }
+        else {
+           const user = new User({
+              lastName:req.body.lastName,  
+              firstName:req.body.firstName,
+              email: req.body.email,
+              password: hash    
+           });
+           user.save().then(function(result) {
+              console.log(result);
+              res.status(200).json({
+                 success: 'New user has been created'
+              });
+           }).catch(error => {
+              res.status(500).json({
+                 error: err
+              });
+           });
+        }
+     });
 
+    
 });
 
 
 
-// router.post('/login',function(req,res,next){
-//    let promise = User.findOne({email:req.body.email}).exec();
-
-//    promise.then(function(doc){
-//     if(doc) {
-//         if(doc.isValid(req.body.password)){
-
-//         }
-//         else {
-//             return res.status(501).json({message:'Invalid Credentials'});
-//         }
-//     }
-//     else {
-//         return res.status(501).json({message:'User email is not registered.'})
-//     }
-//    });
-
-//    promise.catch(function(err){
-//        return res.status(501).json({message:'some internal error'});
-//    })
-// }); 
 
 
 
-// router.put('/put/:id',function(req,res){
-//     res.send({type:'PUT'});
-// });
+
+router.post('/signin', function(req, res){
+    User.findOne({email: req.body.email})
+    .exec()
+    .then(function(user) {
+       bcrypt.compare(req.body.password, user.password, function(err, result){
+          if(err) {
+             return res.status(401).json({
+                failed: 'Unauthorized Access'
+             });
+          }
+          if(result) {
+            const JWTToken = jwt.sign({
+                email: user.email
+         
+              },
+              'secret',
+               {
+                 expiresIn: '2h'
+               });
+               return res.status(200).json({
+                 success: 'Welcome to the JWT Auth',
+                 token: JWTToken
+               });
+
+          }
+          return res.status(401).json({
+             failed: 'Unauthorized Access'
+          });
+
+        
+       });
+    })
+    .catch(error => {
+       res.status(500).json({
+          error: 'mokk'
+       });
+    });;
+ });
+
+
+
+ 
+
+
+
 
 router.delete('/del/:id',function(req,res){
     res.send({type:'DELETE'});

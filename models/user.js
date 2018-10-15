@@ -10,14 +10,14 @@ var bcrypt = require('bcryptjs');
 //authentication
 //create ninja Schema & mmodel
 const UserSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
+    // firstName: {
+    //     type: String,
+    //     required: true
+    // },
+    // lastName: {
+    //     type: String,
+    //     required: true
+    // },
     email: {
         type: String,
         unique: true,
@@ -37,49 +37,28 @@ const UserSchema = new Schema({
     // add in geo location
 });
 
-// Schema.static.hashPassword = function hashPassword(password){
-//     return bcrypt.hashSync(password,10);
-// }
 
-// Schema.methods.isValid = function(hashedPassword){
-//     return bcrypt.compareSync(hashedPassword, this.password);
-// }
 
-// UserSchema.methods.setPassword = function (password) {
-//     this.salt = crypto.randomBytes(16).toString('hex');
-//     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-// };
-
-// UserSchema.methods.validPassword = function (password) {
-//     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
-//     return this.hash === hash;
-// };
-
-UserSchema.methods.generateJwt = function() {
-    var expiry = new Date();
-    expiry.setDate(expiry.getDate() + 7);
-  
-    return jwt.sign({
-      _id: this._id,
-      email: this.email,
-      firstname: this.name,
-      lastname: this.name,
-      exp: parseInt(expiry.getTime() / 1000),
-    }, "MY_SECRET"); // DO NOT KEEP YOUR SECRET IN THE CODE!
-  };
-
- 
+// UserSchema.pre('save', function(next) {
+//     var User = this;
+//     if (!User.isModified('password')) {
+//       return next();
+//     }
+//     bcrypt.genSalt(10, function(err, salt) {
+//       bcrypt.hash(User.password, salt, function(err, hash) {
+//         User.password = hash;
+//         next();
+//       });
+//     });
+//   });
 
 
 
-// UserSchema.statistic.hashPassword = function hashPassword(password){
-//     return bcrypt.hashSync(password,10);
-// }
-
-// UserSchema.methods.isValid = function(hashedPassword){
-//     return bcrypt.compareSync(hashedPassword, this.password);
-// }
-
+//   UserSchema.methods.comparePassword = function(password, done) {
+//     bcrypt.compare(password, this.password, function(err, isMatch) {
+//       done(err, isMatch);
+//     });
+//   };
 
 
 const User = mongoose.model('User', UserSchema);
