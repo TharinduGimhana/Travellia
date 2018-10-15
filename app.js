@@ -6,6 +6,7 @@ const bookingService = require('./services/booking-service');
 const propertyService = require('./services/properties-service');
 const adminService = require('./services/admin-service');
 const destService = require('./services/dest-service');
+const roomService = require('./services/room-service');
 var passport = require('./config/passport');
 
 
@@ -37,6 +38,7 @@ app.use(
  app.use("/properties",propertyService);
  app.use("/admin",adminService);
  app.use("/dest",destService);
+ app.use("/room",roomService);
 // app.use('/', routesApi);
  
 

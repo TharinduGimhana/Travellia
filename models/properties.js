@@ -4,26 +4,32 @@ const Schema = mongoose.Schema;
 const PropertySchema = new Schema({
     name:{
         type:String,
+        required: true
     },
 
     city:{
-        city:String,
+        type:String,
+        required: true
     },
     
     star:{
         type:String,
+        required: true
     },
 
     contactno:{
         type:String,
+        required: true
     },
 
     contactname:{
         type:String,
+        required: true
     },
 
     description:{
         type:String,
+        required: true
     },
 
    photos: [{ 
@@ -31,6 +37,13 @@ const PropertySchema = new Schema({
    }],
    
     currency:{
+        type:String,
+    },
+    address:{
+        type:String,
+        required: true
+    },
+    postalcode:{
         type:String,
     },
 
@@ -53,15 +66,11 @@ const PropertySchema = new Schema({
 
     }],
 
-    location:{
-        address:{
-            type:String,
-        },
-        postalcode:{
-            type:String,
-        },
+  
+     
+
         cordinates:[{lat:Number, lng:Number}],
-    }
+    
 
    
     // add in geo location
