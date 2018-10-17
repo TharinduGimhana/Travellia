@@ -4,32 +4,32 @@ const Schema = mongoose.Schema;
 const PropertySchema = new Schema({
     name:{
         type:String,
-        required: true
+        // required: true
     },
 
     city:{
         type:String,
-        required: true
+        // required: true
     },
     
     star:{
         type:String,
-        required: true
+        // required: true
     },
 
     contactno:{
         type:String,
-        required: true
+        // required: true
     },
 
     contactname:{
         type:String,
-        required: true
+        // required: true
     },
 
     description:{
         type:String,
-        required: true
+        // required: true
     },
 
    photos: [{ 
@@ -41,30 +41,65 @@ const PropertySchema = new Schema({
     },
     address:{
         type:String,
-        required: true
+        // required: true
     },
     postalcode:{
         type:String,
     },
 
-    rooms:[{
-       type:{
-            type:String,
-        },
-        number:{
-            type:Number
-        },
-        description:{
-            type:String
-        },
-        photo:{
-            type:String
-        },
-        price:{
-            type:String
-        }
+    roomtype1:{
+        type:String,
+    },
+    price1:{
+        type:String,
+    },
+    quntity1:{
+        type:String,
+    },
+    sleeps1:{
+        type:String,
+    },
 
-    }],
+    roomtype2:{
+        type:String,
+    },
+    price2:{
+        type:String,
+    },
+    quntity2:{
+        type:String,
+    },
+    sleeps2:{
+        type:String,
+    },
+
+    roomtyp3:{
+        type:String,
+    },
+    price3:{
+        type:String,
+    },
+    quntity3:{
+        type:String,
+    },
+    sleeps3:{
+        type:String,
+    },
+
+    roomtyp4:{
+        type:String,
+    },
+    price4:{
+        type:String,
+    },
+    quntity4:{
+        type:String,
+    },
+    sleeps4:{
+        type:String,
+    },
+
+   
 
   
      
