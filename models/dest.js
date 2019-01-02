@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-//authentication
-//create ninja Schema & mmodel
+ObjectId = Schema.ObjectId;
 const destSchema = new Schema({
-     destName:{
+
+    propertyId  : ObjectId,
+     desname:{
          type:String,
      },
      city:{
@@ -15,9 +16,16 @@ const destSchema = new Schema({
          type:String
         
      },
+     address:{
+        type:String
+       
+    },
      photos: [{ 
         data: Buffer, contentType: String 
     }],
+
+   
+
     location:{
         address:{
             type:String,
@@ -25,8 +33,10 @@ const destSchema = new Schema({
         cordinates:[{lat:Number, lng:Number}],
     }
     
+    
      // add in geo location
 })
+
 
 const dest = mongoose.model('dest',destSchema);
 

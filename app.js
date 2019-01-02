@@ -6,7 +6,8 @@ const bookingService = require('./services/booking-service');
 const propertyService = require('./services/properties-service');
 const adminService = require('./services/admin-service');
 const destService = require('./services/dest-service');
-const roomService = require('./services/room-service');
+const destimagesService = require('./services/destimages-service');
+const hotelimagesService = require('./services/hotelimages-service');
 var passport = require('./config/passport');
 
 
@@ -34,11 +35,15 @@ app.use(
 
  app.use(bodyparser.json());
 //  app.use(passport.initialize());
+app.use('/properties',express.static('uploads'));
  app.use("/authenticate",authenticationService);
  app.use("/properties",propertyService);
  app.use("/admin",adminService);
  app.use("/dest",destService);
- app.use("/room",roomService);
+ app.use("/uploadhotelimage",hotelimagesService);
+ app.use("/uploaddestimage",destimagesService);
+
+
 // app.use('/', routesApi);
  
 
