@@ -17,10 +17,10 @@ var PropertySchema = new Schema({
     
     // pr_id:12
 
-    // city: {
-    //     type: String,
-    //     // required: true
-    // },
+    city: {
+        type: String,
+        // required: true
+    },
 
     // star: {
     //     type: String,

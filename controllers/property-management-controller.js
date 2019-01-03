@@ -38,4 +38,19 @@ deleteProperties = function(req, res, next){
     res.send({ type: 'DELETE' });
 }
 
+searchHotels =function(req,res,next){
+
+    console.log(req.params.id);
+    User.find({name:req.params.id},function(err,usr){
+        if(usr){
+            res.status(200).send(usr);
+        }else{
+            res.status(401).send("notfound");
+        }
+    });
+    
+}
+
+module.exports.searchHotels=searchHotels;
+
 module.exports.deleteProperties = deleteProperties;
